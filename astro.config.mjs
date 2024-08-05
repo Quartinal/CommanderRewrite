@@ -9,7 +9,7 @@ export default defineConfig({
           preserveSymlinks: true
       },
       plugins: [
-        viteImageOptimizer()
+          viteImageOptimizer()
       ]
   },
   devToolbar: {

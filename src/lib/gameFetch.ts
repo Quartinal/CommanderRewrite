@@ -5,9 +5,12 @@ export default class games {
     cdn: string;
     
     constructor(
-        cdn: string
+        /**
+         * the cdn
+         */
+        cdn?: string
     ) {
-        this.cdn = cdn;
+        this.cdn = cdn || "https://radon.games";
     }
 
     /**

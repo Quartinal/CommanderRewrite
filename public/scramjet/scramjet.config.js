@@ -6,6 +6,6 @@
         bundle: "/scramjet/scramjet.bundle.js",
         worker: "/scramjet/scramjet.worker.js",
         client: "/scramjet/scramjet.client.js",
-        codecs: "/scramjet/scramjet.codecs.js",
+        codecs: "/scramjet/scramjet.codecs.js"
     };
 })();

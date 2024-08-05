@@ -3,9 +3,11 @@ import path, { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { existsSync } from "node:fs";
 import createRammerhead from "rammerhead/src/server/index.js";
-import wisp from "wisp-server-node";
+import { createBareServer } from "@tomphttp/bare-server-node";
+import { server as wisp } from "@mercuryworkshop/wisp-js/server";
 import serveStatic from "serve-static";
 import express from "express";
+import compression from "compression";
 import { build } from "astro";
 import { libcurlPath } from "@mercuryworkshop/libcurl-transport";
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
@@ -13,7 +15,6 @@ import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
 import { scramjetPath } from "@mercuryworkshop/scramjet";
 import { uvPath as ultravioletPath } from "@titaniumnetwork-dev/ultraviolet";
 import { bareModulePath } from "@mercuryworkshop/bare-as-module3";
-import compression from "compression";
 
 if (!existsSync("dist")) build({});
 
@@ -24,6 +25,7 @@ const __dirname = dirname(__filename);
 
 const app = express();
 
+const bare = createBareServer("/bare/");
 const rammerhead = createRammerhead();
 
 const rammerheadScopes = [
@@ -84,13 +86,17 @@ app.use("/ultraviolet", serveStatic(ultravioletPath, staticOptions));
 const server = createServer();
 
 server.on("request", (req, res) => {
-    if (shouldRouteRammerhead(req)) {
+    if (bare.shouldRoute(req)) {
+        bare.routeRequest(req, res);
+    } else if (shouldRouteRammerhead(req)) {
         routeRammerheadRequest(req, res);
     } else app(req, res);
 });
 
 server.on("upgrade", (req, socket, head) => {
-    if (req.url?.endsWith("/wisp/")) {
+    if (bare.shouldRoute(req)) {
+        bare.routeUpgrade(req, socket, head);
+    } else if (req.url && req.url?.endsWith("/wisp/")) {
         wisp.routeRequest(req, socket, head);
     } else if (shouldRouteRammerhead(req)) {
         routeRammerheadUpgrade(req, socket, head);
