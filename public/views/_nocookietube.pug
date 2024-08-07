@@ -1,0 +1,25 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        title NoCookieTube 
+        link(rel="stylesheet", type="text/css", href="/stylus/_nocookietube.css")
+        link(rel="stylesheet", type="text/css", href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap")
+    body
+        .navbar
+            .controls
+                .consent-icon 
+                    svg.ionicon(xmlns='http://www.w3.org/2000/svg' viewbox='0 0 512 512' style='width:52px;height:52px')
+                        path(d='M80 320V144a32 32 0 0132-32h0a32 32 0 0132 32v112M144 256V80a32 32 0 0132-32h0a32 32 0 0132 32v160M272 241V96a32 32 0 0132-32h0a32 32 0 0132 32v224M208 240V48a32 32 0 0132-32h0a32 32 0 0132 32v192' fill='none' stroke='#f1f1f1' stroke-linecap='round' stroke-linejoin='round' stroke-width='32')
+                        path(d='M80 320c0 117.4 64 176 152 176s123.71-39.6 144-88l52.71-144c6.66-18.05 3.64-34.79-11.87-43.6h0c-15.52-8.82-35.91-4.28-44.31 11.68L336 320' fill='none' stroke='#f1f1f1' stroke-linecap='round' stroke-linejoin='round' stroke-width='32')
+            .form
+                .input
+                    input(type="text", class="yt-url", placeholder="enter a youtube url", value="https://www.youtube.com/watch?v=dQw4w9WgXcQ", autocomplete="off", spellcheck="false")
+                    button submit
+        .theater 
+            .player
+                #player
+        script(type="text/javascript", src="https://www.youtube.com/iframe_api", defer)
+        script(type="module", src="/js/_nocookietube.js", defer)

@@ -1,3 +1,5 @@
+import rammerheadEncode from "./rammerheadEncode";
+
 export default class games {
     /**
      * the games cdn
@@ -10,7 +12,7 @@ export default class games {
          */
         cdn?: string
     ) {
-        this.cdn = cdn || "https://radon.games";
+        this.cdn = cdn || String(rammerheadEncode("https://radon.games"));
     }
 
     /**
@@ -101,7 +103,7 @@ export default class games {
 
                 if (urls.length > 60) urls.slice(0, 60);
 
-                urls.forEach(url => cdn + url);
+                urls.forEach(url => cdn + String(rammerheadEncode(url)));
 
                 return urls;
             }(this.method(), this.#dataPath() as string, this.cdn as any))
@@ -134,7 +136,7 @@ export default class games {
 
                 if (icons.length > 60) icons.slice(0, 60);
 
-                icons.forEach(icon => cdn + icon);
+                icons.forEach(icon => cdn + String(rammerheadEncode(icon)));
 
                 return icons;
             }(this.method(), this.#dataPath() as string, this.cdn as any))

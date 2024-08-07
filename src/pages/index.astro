@@ -113,6 +113,7 @@ const theme = storage.get("theme") || "default";
                 } else {
                     if (proxy === "rammerhead") {
                         location.href = origin + 
+                            await
                             rammerheadSearch(
                                 "https://www.google.com/search?q=%s"
                                 // @ts-ignore
@@ -120,6 +121,7 @@ const theme = storage.get("theme") || "default";
                             );
                     } else if (proxy === "ultraviolet") {
                         location.href = origin +
+                            await
                             sw.encodeUltraviolet(
                                 "https://www.google.com/search?q=%s"
                                 // @ts-ignore
@@ -127,6 +129,7 @@ const theme = storage.get("theme") || "default";
                             );
                     } else {
                         location.href = origin +
+                            await
                             sw.encodeScramjet(
                                 "https://www.google.com/search?q=%s"
                                 // @ts-ignore

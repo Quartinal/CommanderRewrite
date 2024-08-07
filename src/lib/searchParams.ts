@@ -1,6 +1,9 @@
 import { BroadcastChannel } from "broadcast-channel";
 import storage from "./localStorage";
 
+/**
+ * the params store class
+ */
 class ParamsStore {
     /**
      * returns the url search params object used throughout this class
@@ -13,7 +16,7 @@ class ParamsStore {
      * the key-value store of the search params used for commander's interactivity
      */
     store() {
-        this.#compareWithLocalStorage();
+        this.compareWithLocalStorage();
 
         return {
             useRammerhead: this.url().get("userammerhead") 
@@ -30,7 +33,7 @@ class ParamsStore {
     /**
      * compares the parameters with localstorage keys to make sure nothing overlaps
      */
-    async #compareWithLocalStorage() {
+    async compareWithLocalStorage() {
         const localStorageKeys = Object.keys(storage);
         const urlParams = this.store();
 
@@ -74,4 +77,4 @@ class ParamsStore {
     }
 };
 
-export default ParamsStore;
+export { ParamsStore };
