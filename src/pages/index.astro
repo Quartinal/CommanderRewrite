@@ -41,8 +41,7 @@ const theme = storage.get("theme") || "default";
     import RegisterSW from "../lib/swRegister";
 
     window.onload = async () => {
-        RegisterSW();
-        setupBareMux();
+        await (RegisterSW() && setupBareMux());
 
         const parent = document.getElementById("selectables-parent");
         const selectableDivs = parent.querySelectorAll("#selectable");

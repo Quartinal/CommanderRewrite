@@ -68,7 +68,7 @@ class ParamsStore {
 
             for (const key of localStorageKeys) {
                 if (urlParamsSnapshot.includes(storage[key])) {
-                    alert(`${key} has already been set in localStorage. To remove it, try clearing the site data.`);
+                    alert(`${key} has already been set in localStorage.\n\nTo remove it, try clearing the site data.`);
                     console.error(`LocalStorage key ${key} has an overlap with the current URL parameters.`);
                     return;
                 }
